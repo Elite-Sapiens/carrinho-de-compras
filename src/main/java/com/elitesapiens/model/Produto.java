@@ -11,6 +11,13 @@ public class Produto implements IProduto {
     private double preco;
     private int quantidade;
 
+    public void setQuantidade(int quantidade) {
+        if (quantidade <= 0) {
+            throw new InvalidQuantityException("Quantidade deve ser maior ou igual a zero.");
+        }
+        this.quantidade = quantidade;
+    }
+
     @Override
     public void addQuantidade(int quantidade) {
         this.quantidade += quantidade;
@@ -18,14 +25,10 @@ public class Produto implements IProduto {
 
     @Override
     public void removeQuantidade(int quantidade) {
-        try {
-            if (this.quantidade - quantidade < 0) {
-                throw new InvalidQuantityException("Quantidade inválida");
-            }
-            this.quantidade -= quantidade;
-        } catch (InvalidQuantityException e) {
-            System.out.println(e.getMessage());
+        if (this.quantidade - quantidade < 0) {
+            throw new InvalidQuantityException("Quantidade inválida");
         }
+        this.quantidade -= quantidade;
     }
 
     @Override

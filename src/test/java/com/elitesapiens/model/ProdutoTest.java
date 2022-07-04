@@ -1,5 +1,6 @@
 package com.elitesapiens.model;
 
+import com.elitesapiens.model.exceptions.InvalidQuantityException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -97,5 +98,26 @@ class ProdutoTest {
 
             assertEquals(precoTotal, produto.getPrecoTotal());
         }
+    }
+
+    @Nested
+    class VerificandoException {
+
+        @Test
+        void deveRetornarExceptionParaQuantidadeMenorQueZero() {
+            assertThrows(InvalidQuantityException.class, () -> produto.setQuantidade(-1));
+        }
+
+        @Test
+        void deveRetornarExceptionParaQuantidadeIgualAZero() {
+            assertThrows(InvalidQuantityException.class, () -> produto.setQuantidade(0));
+        }
+
+        @Test
+        void deveRetornarExceptionAoRemoverQuantidadeParaFicarNegativo() {
+            produto.setQuantidade(1);
+            assertThrows(InvalidQuantityException.class, () -> produto.removeQuantidade(2));
+        }
+
     }
 }
