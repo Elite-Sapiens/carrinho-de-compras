@@ -80,4 +80,28 @@ class CarrinhoTest {
         carrinho.removeProduto(P1);
         assertEquals(0, carrinho.getProdutos().size());
     }
+
+    @Test
+    void naoDeveAceitarItensIguaisPoremAumentarSuaQuantidadeNoCarrinho() {
+        IProduto P1 = Produto.builder()
+                        .nome("Creme Dental")
+                        .preco(2.50)
+                        .quantidade(1)
+                        .build();
+
+        IProduto P2 = Produto.builder()
+                        .nome("Creme Dental")
+                        .preco(2.50)
+                        .quantidade(1)
+                        .build();
+
+        carrinho.addProduto(P1);
+        carrinho.addProduto(P2);
+
+        var itensDiferentesNoCarrinho = carrinho.getProdutos().size();
+        var quantidadeDeCremeDental = carrinho.getProdutos().stream().iterator().next().getQuantidade();
+
+        assertEquals(1, itensDiferentesNoCarrinho);
+        assertEquals(2, quantidadeDeCremeDental);
+    }
 }
