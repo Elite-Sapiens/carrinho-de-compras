@@ -32,4 +32,9 @@ public class Produto implements IProduto {
     public double getPrecoTotal() {
         return this.preco * this.quantidade;
     }
+
+    @Override
+    public int compareTo(IProduto o) {
+        return this.nome.compareTo(o.getNome());
+    }
 }

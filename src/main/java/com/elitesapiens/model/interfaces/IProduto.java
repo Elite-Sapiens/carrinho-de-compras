@@ -1,6 +1,6 @@
 package com.elitesapiens.model.interfaces;
 
-public interface IProduto {
+public interface IProduto extends Comparable<IProduto> {
     // Getters
     String getNome();
     double getPreco();
